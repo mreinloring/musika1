@@ -8,8 +8,8 @@
     <div class="py-12">
         <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
             @livewire('profesores.show-profesores')
-           {{-- Si queremos pasar una variable... --}}
-           @livewire('profesores.show-profesores',['nombre'=>'Juan es un nombre de prueba'])
+           {{-- Si queremos pasar una variable...
+           @livewire('profesores.show-profesores',['nombre'=>'Juan es un nombre de prueba'])--}}
         </div>
     </div>
 </x-app-layout>

@@ -1,40 +1,86 @@
 <div>
     <x-slot name="header">
         <h2 class="font-semibold text-xl text-gray-800 leading-tight">
-            {{ __('Dashboard') }}
+            {{ __('Profesores') }}
         </h2>
     </x-slot>
 
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <!-- This example requires Tailwind CSS v2.0+ -->
         <x-table>
-            <div class="px-4 py-6">
-                {{-- <input type="text" wire:model="search"> --}}
-                <x-jet-input class="w-full" placeholder="Escriba su busqueda" wire:model="search" type='text'></x-input>
+            <div class="px-4 py-6 flex items-center">
+                {{-- Este es el buscador --}}
+                <x-jet-input class="flex-1 mr-4" placeholder="Escriba su busqueda" wire:model="search" type='text'></x-input>
+                    @livewire('profesores.create-profesore')
             </div>
+             {{-- Esta es la tabla --}}
             @if ($profesores->count())
-
+                Profesores :{{$profesores->count()}}
                 <table class="min-w-full divide-y divide-gray-200">
                     <thead class="bg-gray-50">
                         <tr>
                             <th scope="col"
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer" wire:click="order('id')">
                                 ID
+                                {{-- Sort --}}
+                                        @if ($sort == 'id')
+                                            @if ($direction == 'asc')
+                                                <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
+                                            @else
+                                                <i class="fas fa-sort-alpha-down-alt float-right mt-1"></i>
+                                            @endif
+                                        @else
+                                            <i class="fas fa-sort float-right mt-1"></i>
+                                        @endif
                             </th>
                             <th scope="col"
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer" wire:click="order('nombre')">
                                 Nombre
+                                 {{-- Sort --}}
+                                        @if ($sort == 'nombre')
+                                            @if ($direction == 'asc')
+                                                <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
+                                            @else
+                                                <i class="fas fa-sort-alpha-down-alt float-right mt-1"></i>
+                                            @endif
+                                        @else
+                                            <i class="fas fa-sort float-right mt-1"></i>
+                                        @endif
                             </th>
                             <th scope="col"
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer" wire:click="order('telefono')">
                                 Telefono
+                                {{-- Sort --}}
+                                        @if ($sort == 'telefono')
+                                            @if ($direction == 'asc')
+                                                <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
+                                            @else
+                                                <i class="fas fa-sort-alpha-down-alt float-right mt-1"></i>
+                                            @endif
+                                        @else
+                                            <i class="fas fa-sort float-right mt-1"></i>
+                                        @endif
                             </th>
                             <th scope="col"
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
-                                Fecha Nacimiento
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer" wire:click="order('numSS')">
+                                Numero SS
+                                 {{-- Sort --}}
+                                        @if ($sort == 'numSS')
+                                            @if ($direction == 'asc')
+                                                <i class="fas fa-sort-alpha-up-alt float-right mt-1"></i>
+                                            @else
+                                                <i class="fas fa-sort-alpha-down-alt float-right mt-1"></i>
+                                            @endif
+                                        @else
+                                            <i class="fas fa-sort float-right mt-1"></i>
+                                        @endif
                             </th>
                             <th scope="col"
-                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer" >
+                                DNI
+                            </th>
+                            <th scope="col"
+                                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
                                 Edad
                             </th>
 
@@ -45,53 +91,62 @@
                         </tr>
                     </thead>
                     <tbody class="bg-white divide-y divide-gray-200">
-                        @foreach ($profesores as $profesore)
 
-                            <tr>
-                                <td class="px-6 py-4 ">
-                                    <span
-                                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full  text-gray-800">
-                                        {{$profesore->id}}
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4 ">
-                                    {{-- <div class="flex items-center">
-                                        <div class="flex-shrink-0 h-10 w-10">
-                                            <img class="h-10 w-10 rounded-full"
-                                                src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
-                                                alt="">
-                                        </div> --}}
+                            @foreach ($profesores as $profesore)
+                            {{-- para que solo salgan los profesores actuales --}}
+                                @if ($profesore->fechaBaja= 'Null')
 
-                                        <div class="ml-4">
-                                            <div class="text-sm font-medium text-black-900">
-                                                {{$profesore->nombre." ". $profesore->apellido1." ".$profesore->apellido2}}
-                                            </div>
-                                            <div class="text-sm text-gray-500">
-                                                {{$profesore->email}}
+
+                                <tr>
+                                    <td class="px-6 py-4 ">
+                                        <span
+                                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full  text-gray-800">
+                                            {{$profesore->id}}
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4 ">
+                                        {{-- <div class="flex items-center">
+                                            <div class="flex-shrink-0 h-10 w-10">
+                                                <img class="h-10 w-10 rounded-full"
+                                                    src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=4&w=256&h=256&q=60"
+                                                    alt="">
+                                            </div> --}}
+
+                                            <div class="ml-4">
+                                                <div class="text-sm font-medium text-black-900">
+                                                    {{$profesore->nombre ." ". $profesore->apellido1." ".$profesore->apellido2}}
+                                                </div>
+                                                <div class="text-sm text-gray-500">
+                                                    {{$profesore->email}}
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                </td>
+                                    </td>
 
-                                <td class="px-6 py-4 ">
-                                    <span
-                                        class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full  text-gray-500">
-                                        {{$profesore->telefono}}
-                                    </span>
-                                </td>
-                                <td class="px-6 py-4  text-sm text-gray-500">
-                                    {{$profesore->fechaNto}}
-                                </td>
-                                <td class="px-6 py-4  text-sm text-gray-500">
-                                    {{$profesore->age}}
-                                </td>
+                                    <td class="px-6 py-4 ">
+                                        <span
+                                            class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full  text-gray-500">
+                                            {{$profesore->telefono}}
+                                        </span>
+                                    </td>
+                                    <td class="px-6 py-4  text-sm text-gray-500">
+                                        {{$profesore->numSS}}
+                                    </td>
+                                    <td class="px-6 py-4  text-sm text-gray-500">
+                                        {{$profesore->dni}}
+                                    </td>
+                                    <td class="px-6 py-4  text-sm text-gray-500">
+                                        {{$profesore->age}}
+                                    </td>
 
 
-                                <td class="px-6 py-4  text-right text-sm font-medium">
-                                    <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
-                                </td>
-                            </tr>
-                        @endforeach
+                                    <td class="px-6 py-4  text-right text-sm font-medium">
+                                        <a href="#" class="text-indigo-600 hover:text-indigo-900">Edit</a>
+                                    </td>
+                                </tr>
+
+                                @endif
+                            @endforeach
 
                         <!-- More people... -->
                     </tbody>

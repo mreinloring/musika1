@@ -20,4 +20,4 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', ShowProfesores::class)
  ->name('dashboard');
 
-
+Route::get('/',ShowProfesores::class)->name('profesores');
