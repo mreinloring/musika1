@@ -13,78 +13,92 @@
     <x-slot name="content">
         <div class="mb-4">
             <x-jet-label value="Nombre"></x-jet-label>
-            <x-jet-input type="text" class="w-full" wire:model.defer="nombre"></x-jet-input>
+            <x-jet-input type="text" class="w-full" wire:model="nombre"></x-jet-input>
+            <x-jet-input-error for="nombre"/>
         </div>
         <div class="mb-4">
             <x-jet-label value="Apellido 1"></x-jet-label>
-            <x-jet-input type="text" class="w-full" wire:model.defer="apellido1"></x-jet-input>
+            <x-jet-input type="text" class="w-full" wire:model="apellido1"></x-jet-input>
+            <x-jet-input-error for="apellido1"/>
         </div>
 
         <div class="mb-4">
             <x-jet-label value="Apellido 2"></x-jet-label>
-            <x-jet-input type="text" class="w-full" wire:model.defer="apellido2"></x-jet-input>
+            <x-jet-input type="text" class="w-full" wire:model="apellido2"></x-jet-input>
+            <x-jet-input-error for="apellido2"/>
         </div>
         <div class="mb-4 grid grid-cols-2">
         <div class="mb-4 grid-1 mr-4">
             <x-jet-label value="Email"></x-jet-label>
-            <x-jet-input type="text" class="w-full" wire:model.defer="email"></x-jet-input>
+            <x-jet-input type="text" class="w-full" wire:model="email"></x-jet-input>
+            <x-jet-input-error for="email"/>
         </div>
         <div class="mb-4 grid-2 ">
             <x-jet-label value="Telefono"></x-jet-label>
-            <x-jet-input type="text" class="w-full" wire:model.defer="telefono"></x-jet-input>
+            <x-jet-input type="text" class="w-full" wire:model="telefono"></x-jet-input>
+            <x-jet-input-error for="telefono"/>
         </div>
         </div>
         <div class="mb-4 grid grid-cols-2">
         <div class="mb-4 grid-1 mr-4">
             <x-jet-label value="DNI"></x-jet-label>
-            <x-jet-input type="text" class="w-full" wire:model.defer="dni"></x-jet-input>
+            <x-jet-input type="text" class="w-full" wire:model="dni"></x-jet-input>
+            <x-jet-input-error for="dni"/>
         </div>
         <div class="mb-4 grid-2">
             <x-jet-label value="Numero SS"></x-jet-label>
-            <x-jet-input type="text" class="w-full" wire:model.defer="numSS"></x-jet-input>
+            <x-jet-input type="text" class="w-full" wire:model="numSS"></x-jet-input>
         </div>
         </div>
         <div class="mb-4 grid grid-cols-3">
             <div class="grid-1">
                 <x-jet-label value="Fecha Nto"></x-jet-label>
-                <x-jet-input type="date" wire:model.defer="fechaNto"></x-jet-input>
+                <x-jet-input type="date" wire:model="fechaNto"></x-jet-input>
+                <x-jet-input-error for="fechaNto"/>
             </div>
             <div class="grid-2">
                 <x-jet-label value="Fecha Alta"></x-jet-label>
-                <x-jet-input type="date" wire:model.defer="fechaAlta"></x-jet-input>
+                <x-jet-input type="date" wire:model="fechaAlta"></x-jet-input>
+                <x-jet-input-error for="fechaAlta"/>
             </div>
             <div class="grid-3">
                 <x-jet-label value="Fecha Baja"></x-jet-label>
-                <x-jet-input type="date" wire:model.defer="fechaBaja"></x-jet-input>
+                <x-jet-input type="date" wire:model="fechaBaja"></x-jet-input>
+                <x-jet-input-error for="fechaBaja"/>
             </div>
         </div>
 
         <div class="mb-4">
             <x-jet-label value="Iban"></x-jet-label>
-            <x-jet-input type="text" class="w-full" wire:model.defer="iban"></x-jet-input>
+            <x-jet-input type="text" class="w-full" wire:model="iban"></x-jet-input>
+            <x-jet-input-error for="iban"/>
         </div>
         <div class="mb-4 grid grid-cols-3">
             <div class="grid-1">
                 <x-jet-label value="Calle"></x-jet-label>
-                <x-jet-input type="text" wire:model.defer="calle"></x-jet-input>
+                <x-jet-input type="text" wire:model="calle"></x-jet-input>
+                <x-jet-input-error for="calle"/>
             </div>
             <div class="grid-2">
                 <x-jet-label value="Numero"></x-jet-label>
-                <x-jet-input type="text" wire:model.defer="numero"></x-jet-input>
+                <x-jet-input type="text" wire:model="numero"></x-jet-input>
+                <x-jet-input-error for="numero"/>
             </div>
             <div class="grid-3">
                 <x-jet-label value="Piso"></x-jet-label>
-                <x-jet-input type="text" wire:model.defer="piso"></x-jet-input>
+                <x-jet-input type="text" wire:model="piso"></x-jet-input>
+                <x-jet-input-error for="piso"/>
             </div>
         </div>
         <div class="mb-4 grid grid-cols-3">
             <div class="grid-1">
                 <x-jet-label value="Codigo postal"></x-jet-label>
-                <x-jet-input type="text" wire:model.defer="codigoPostal" ></x-jet-input>
+                <x-jet-input type="text" wire:model="codigoPostal" ></x-jet-input>
+                <x-jet-input-error for="codigoPostal"/>
             </div>
             <div class="grid-2">
                 <x-jet-label value="Poblacion"></x-jet-label>
-                    <select  name="poblacion" id="poblacion" class="form-control" wire:model.defer="poblacion">
+                    <select  name="poblacion" id="poblacion" class="form-control" wire:model="poblacion">
                         <option value="">Seleccione Poblacion</option>
                         <option value="Abadiño">Abadiño</option>
                         <option value="Amurrio">Amurrio</option>
@@ -105,17 +119,19 @@
                         <option value="Zaratamo">Zaratamo</option>
                         <option value="Ziortza-Bolibar">Ziortza-Bolibar</option>
                     </select>
+                    <x-jet-input-error for="poblacion"/>
 
             </div>
 
             <div class="grid-3">
                 <x-jet-label value="Provincia"></x-jet-label>
-                    <select  name="provincia" id="provincia" class="form-control" wire:model.defer="provincia">
+                    <select  name="provincia" id="provincia" class="form-control" wire:model="provincia">
                             <option value="">Seleccione provincia</option>
                             <option value="Araba">Araba</option>
                             <option value="Bizkaia">Bizkaia</option>
                             <option value="Gipuzkoa">Gipuzkoa</option>
                     </select>
+                <x-jet-input-error for="provincia"/>
 
             </div>
 

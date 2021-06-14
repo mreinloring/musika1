@@ -9,5 +9,12 @@ use Carbon\Carbon;
 class Profesore extends Model
 {
     use HasFactory;
+    protected $fillable=['nombre', 'apellido1', 'apellido2', 'email', 'telefono',
+                            'dni', 'numSS', 'fechaNto', 'fechaAlta', 'fechaBaja', 'image', 'iban',
+                            'calle', 'numero', 'piso', 'codigoPostal', 'poblacion', 'provincia'];
 
+    public function getAgeAttribute()
+    {
+        return Carbon::parse($this->attributes["fechaNto"])->age;
+    }
 }
