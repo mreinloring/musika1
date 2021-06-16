@@ -6,6 +6,7 @@ use Livewire\Component;
 use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
+use Livewire\WithPagination;
 
 use App\Models\Profesore;
 
@@ -15,16 +16,27 @@ class ShowProfesores extends Component
 {
 
     use WithFileUploads;
+    use WithPagination;
 
 
     public $profesore, $fechaNto, $image , $identificador;
     //Propiedades del buscador y orden
-    public $search;
+    public $search ='';
     public $sort= 'id';
     public $direction= 'desc';
+    public $cant = '10';
+    public $readyToLoad = false;
+   //Para enviar el paginador y buscador por la url
+    protected $queryString = [
+        'cant' =>['except'=> '10'],
+        'sort' =>['except'=>'id'],
+        'direction' =>['except'=>'desc'],
+        'search' =>['except'=>'']
+    ];
+
     public function mount(){
-        $this->identificador=rand();
-        $this->profesore =new Profesore(); //Inicializamos esta variable
+        $this->identificador = rand();
+        $this->profesore = new Profesore(); //Inicializamos esta variable
     }
 
     //Para abrir el modal de editar
@@ -46,30 +58,34 @@ class ShowProfesores extends Component
         'profesore.piso' => '',
         'profesore.poblacion' => '',
         'profesore.provincia' => '',
-        'profesore.image'=>'',
-    ];
+     ];
 
     //Cuando escuche el metodo render de createProfesores, ejecuta el metodo render de showProfesores
     //protected $listeners =['render'=>'render'];
     //Si el metodo es el mismo, se escribe una vez
     protected $listeners = ['render'];
 
-
-
     public function render()
     {
-        $profesores= Profesore::where('id', 'like','%'.$this->search.'%')
-                                ->orWhere('nombre', 'like', '%' . $this->search . '%')
-                                ->orWhere('apellido1', 'like', '%' . $this->search . '%')
-                                ->orWhere('apellido2', 'like', '%' . $this->search . '%')
-                                ->orWhere('email', 'like', '%' . $this->search . '%')
-                                ->orWhere('telefono', 'like', '%' . $this->search . '%')
-                                ->orderBy($this->sort,$this->direction)
-                                ->get();
+        if ($this->readyToLoad) {
+            $profesores = Profesore::where('id', 'like', '%' . $this->search . '%')
+                ->orWhere('nombre', 'like', '%' . $this->search . '%')
+                ->orWhere('apellido1', 'like', '%' . $this->search . '%')
+                ->orWhere('apellido2', 'like', '%' . $this->search . '%')
+                ->orWhere('email', 'like', '%' . $this->search . '%')
+                ->orWhere('telefono', 'like', '%' . $this->search . '%')
+                ->orderBy($this->sort, $this->direction)
+                ->paginate($this->cant);
+        }else {
+            $profesores =[];
+        }
 
         return view('livewire.profesores.show-profesores',compact('profesores'));
 
+    }
 
+    public function loadRegistro(){
+        $this->readyToLoad= true;
     }
 
     public function order($sort){
@@ -106,6 +122,9 @@ class ShowProfesores extends Component
         $this->identificador = rand();
 
         $this->emit('alert', 'El profesor se ha actualizado correctamente');
+    }
+    public function delete($id){
+        $this->profesore->delete();
     }
 
 
