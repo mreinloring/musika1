@@ -1,6 +1,6 @@
 <div>
     {{-- //boton para agregar registro --}}
-   <x-jet-danger-button wire:click="$set('open', true)">
+   <x-jet-danger-button wire:click="$set('open', true)" >
        Crear nuevo profesor
    </x-jet-danger-button>
 

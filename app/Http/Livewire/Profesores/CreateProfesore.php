@@ -68,7 +68,7 @@ class CreateProfesore extends Component
         $this->identificador = rand();
 
         //Esto es para que vuelva a cargarse la pagina de profesores unicamente, no todas
-        $this->emitTo('show-profesores','render');
+        $this->emitTo('profesores.show-profesores','render');
         $this->emit('alert', 'El profesor se ha dado de alta satisfactoriamente');
     }
 

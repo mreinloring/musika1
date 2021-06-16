@@ -3,22 +3,33 @@
 namespace App\Http\Livewire\Profesores;
 
 use Livewire\Component;
-use App\Models\Profesore;
+use Livewire\WithFileUploads;
+use Illuminate\Support\Facades\Storage;
 use Carbon\Carbon;
+
+use App\Models\Profesore;
+
+
 
 class ShowProfesores extends Component
 {
 
-    public $profesore, $fechaNto;
+    use WithFileUploads;
+
+
+    public $profesore, $fechaNto, $image , $identificador;
     //Propiedades del buscador y orden
     public $search;
     public $sort= 'id';
     public $direction= 'desc';
+    public function mount(){
+        $this->identificador=rand();
+        $this->profesore =new Profesore(); //Inicializamos esta variable
+    }
 
-    //Cuando escuche el metodo render de createProfesores, ejecuta el metodo render de showProfesores
-    //protected $listeners =['render'=>'render'];
-    //Si el metodo es el mismo, se escribe una vez
-    protected $listeners = ['render'];
+    //Para abrir el modal de editar
+    public $open_edit = false;
+
     protected $rules = [
         'profesore.nombre' => 'required|max:50',
         'profesore.apellido1' => 'required|max:50',
@@ -29,8 +40,20 @@ class ShowProfesores extends Component
         'profesore.numSS' => 'required|max:50',
         'profesore.fechaNto' => 'required',
         'profesore.fechaAlta' => 'required',
-        'profesore.fechaBaja' => '',
+        'profesore.iban' => '',
+        'profesore.calle' => '',
+        'profesore.numero' => '',
+        'profesore.piso' => '',
+        'profesore.poblacion' => '',
+        'profesore.provincia' => '',
+        'profesore.image'=>'',
     ];
+
+    //Cuando escuche el metodo render de createProfesores, ejecuta el metodo render de showProfesores
+    //protected $listeners =['render'=>'render'];
+    //Si el metodo es el mismo, se escribe una vez
+    protected $listeners = ['render'];
+
 
 
     public function render()
@@ -60,11 +83,30 @@ class ShowProfesores extends Component
             $this->sort = $sort;
             $this->direction = 'asc';
         }
+    }
+    public function edit(Profesore $profesore){
 
-
-
+        $this->profesore =$profesore;
+        $this->open_edit= true;
     }
 
+    public function update(){
+
+        $this->validate();
+
+        if ($this->image) {
+            //Para eliminar la imagen almacenada antes de cambiarla
+            Storage::delete([$this->profesore->image]);
+            //subo la nueva imagen y reemplazo la url
+            $this->profesore->image = $this->image->store('profesores');
+        }
+
+        $this->profesore->save();
+        $this->reset(['open_edit', 'image']);
+        $this->identificador = rand();
+
+        $this->emit('alert', 'El profesor se ha actualizado correctamente');
+    }
 
 
 }
