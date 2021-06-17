@@ -26,6 +26,8 @@ class ShowProfesores extends Component
     public $direction= 'desc';
     public $cant = '10';
     public $readyToLoad = false;
+    public $disabled = true;
+
    //Para enviar el paginador y buscador por la url
     protected $queryString = [
         'cant' =>['except'=> '10'],
@@ -63,7 +65,7 @@ class ShowProfesores extends Component
     //Cuando escuche el metodo render de createProfesores, ejecuta el metodo render de showProfesores
     //protected $listeners =['render'=>'render'];
     //Si el metodo es el mismo, se escribe una vez
-    protected $listeners = ['render'];
+    protected $listeners = ['render','delete'];
 
     public function render()
     {
@@ -123,9 +125,7 @@ class ShowProfesores extends Component
 
         $this->emit('alert', 'El profesor se ha actualizado correctamente');
     }
-    public function delete($id){
-        $this->profesore->delete();
+    public function delete(Profesore $profesore){
+        $profesore->delete();
     }
-
-
 }

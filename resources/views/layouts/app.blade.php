@@ -41,8 +41,9 @@
         </div>
 
         @stack('modals')
-
+        @stack('js')
         @livewireScripts
+
 
         <script>
             Livewire.on('alert',function(message){
@@ -53,5 +54,7 @@
                 )
             })
         </script>
+
+
     </body>
 </html>
