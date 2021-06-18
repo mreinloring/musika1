@@ -64,7 +64,7 @@ class ShowProfesores extends Component
 
     //Cuando escuche el metodo render de createProfesores, ejecuta el metodo render de showProfesores
     //protected $listeners =['render'=>'render'];
-    //Si el metodo es el mismo, se escribe una vez
+    //Si el metodo es el mismo, se escribe una vez. se pueden añadir tantos metodos como sean necesarios
     protected $listeners = ['render','delete'];
 
     public function render()
