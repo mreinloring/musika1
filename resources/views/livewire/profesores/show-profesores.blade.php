@@ -133,16 +133,16 @@
                                                 <div class="text-sm font-medium text-black-900">
                                                     {{ $item->nombre . ' ' . $item->apellido1 . ' ' . $item->apellido2 }}
                                                 </div>
-                                                <div class="text-sm text-gray-500">
+                                                <div class="text-sm font-medium text-gray-500">
                                                     {{ $item->email }}
                                                 </div>
                                             </div>
 
                                         </td>
                                         <td class="px-6 py-4 ">
-                                            <span class="px-2 inline-flex text-xs leading-5 font-semibold rounded-full  text-gray-500">
-                                                {{ $item->telefono }}
-                                            </span>
+                                            <div class="text-sm font-medium text-gray-500">
+                                                    {{ $item->telefono }}
+                                                </div>
                                         </td>
                                         <td class="px-6 py-4  text-sm text-gray-500">
                                             {{ $item->numSS }}
@@ -275,29 +275,29 @@
                 <x-jet-input-error for="iban" />
             </div>
             <div class="mb-4 grid grid-cols-3">
-                <div class="grid-1">
+                <div class="grid-1 mx-2">
                     <x-jet-label value="Calle"></x-jet-label>
                     <x-jet-input type="text" wire:model="profesore.calle"></x-jet-input>
                     <x-jet-input-error for="calle" />
                 </div>
-                <div class="grid-2">
+                <div class="grid-2 mx-2">
                     <x-jet-label value="Numero"></x-jet-label>
                     <x-jet-input type="text" wire:model="profesore.numero"></x-jet-input>
                     <x-jet-input-error for="numero" />
                 </div>
-                <div class="grid-3">
+                <div class="grid-3 mx-2">
                     <x-jet-label value="Piso"></x-jet-label>
                     <x-jet-input type="text" wire:model="profesore.piso"></x-jet-input>
                     <x-jet-input-error for="piso" />
                 </div>
             </div>
             <div class="mb-4 grid grid-cols-3">
-                <div class="grid-1">
+                <div class="grid-1 mx-2">
                     <x-jet-label value="Codigo postal"></x-jet-label>
                     <x-jet-input type="text" wire:model="profesore.codigoPostal"></x-jet-input>
                     <x-jet-input-error for="codigoPostal" />
                 </div>
-                <div class="grid-2">
+                <div class="grid-2 mx-2">
                     <x-jet-label value="Poblacion"></x-jet-label>
                     <select name="poblacion" id="poblacion" class="form-control" wire:model="profesore.poblacion">
                         <option value="">Seleccione Poblacion</option>
@@ -324,12 +324,11 @@
 
                 </div>
 
-                <div class="grid-3">
+                <div class="grid-3 mx-2">
                     <x-jet-label value="Provincia"></x-jet-label>
                     <select name="provincia" id="provincia" class="form-control" wire:model="profesore.provincia">
-                        <option value="">Seleccione provincia</option>
-                        <option value="Araba">Araba</option>
                         <option value="Bizkaia">Bizkaia</option>
+                        <option value="Araba">Araba</option>
                         <option value="Gipuzkoa">Gipuzkoa</option>
                     </select>
                     <x-jet-input-error for="provincia" />

@@ -54,10 +54,12 @@ class ShowProfesores extends Component
         'profesore.numSS' => 'required|max:50',
         'profesore.fechaNto' => 'required',
         'profesore.fechaAlta' => 'required',
+        'profesore.fechaBaja' => '',
         'profesore.iban' => '',
         'profesore.calle' => '',
         'profesore.numero' => '',
         'profesore.piso' => '',
+        'profesore.codigoPostal'=>'|max:5',
         'profesore.poblacion' => '',
         'profesore.provincia' => '',
      ];

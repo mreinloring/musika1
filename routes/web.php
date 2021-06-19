@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Profesores\ShowProfesores;
+use App\Http\Livewire\Asignaturas\ShowAsignaturas;
+
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -17,7 +20,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
+
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', ShowProfesores::class)
  ->name('dashboard');
 
-Route::get('/',ShowProfesores::class)->name('profesores');
+Route::get('/profesores',ShowProfesores::class)->name('profesores');
+Route::get('/asignaturas', ShowAsignaturas::class)->name('asignaturas');
+
+

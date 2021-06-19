@@ -13,8 +13,15 @@ class Profesore extends Model
                             'dni', 'numSS', 'fechaNto', 'fechaAlta', 'fechaBaja', 'image', 'iban',
                             'calle', 'numero', 'piso', 'codigoPostal', 'poblacion', 'provincia'];
 
+    //Para calcular la edad
     public function getAgeAttribute()
     {
         return Carbon::parse($this->attributes["fechaNto"])->age;
+    }
+
+    //Relacion muchos a muchos
+    public function asignaturas()
+    {
+        return $this->belongsToMany('App\Models\Asignatura');
     }
 }
