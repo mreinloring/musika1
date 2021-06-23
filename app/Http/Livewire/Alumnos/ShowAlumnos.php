@@ -4,14 +4,14 @@ namespace App\Http\Livewire\Alumnos;
 
 use Livewire\Component;
 use Illuminate\Support\Facades\Storage;
-use Livewire\WithPagination;
+
 
 
 use App\Models\Alumno;
 
 class ShowAlumnos extends Component
 {
-    use WithPagination;
+
 
     //Propiedades del buscador y orden
     public $search = '';
@@ -48,10 +48,34 @@ class ShowAlumnos extends Component
     ];
     public function render()
     {
+        //$alumnos=Alumno::whereNull('fechaBaja')->get();
 
-        $alumnos=Alumno::whereNull('fechaBaja')->get();
+
+         $alumnos=Alumno::whereNull('fechaBaja')
+                        ->where('id', 'like', '%' . $this->search . '%')
+                        ->where('nombre', 'like', '%' . $this->search . '%')
+                        ->where('apellido1', 'like', '%' . $this->search . '%')
+                        ->where('apellido2', 'like', '%' . $this->search . '%')
+                        ->where('email', 'like', '%' . $this->search . '%')
+                        ->where('telefono', 'like', '%' . $this->search . '%')
+                        ->orderBy($this->sort, $this->direction)
+                        ->get();
 
 
         return view('livewire.alumnos.show-alumnos', compact('alumnos'));
+    }
+
+    public function order($sort)
+    {
+        if ($this->sort == $sort) {
+            if ($this->direction == 'desc') {
+                $this->direction = 'asc';
+            } else {
+                $this->direction = 'desc';
+            }
+        } else {
+            $this->sort = $sort;
+            $this->direction = 'asc';
+        }
     }
 }
