@@ -3,6 +3,8 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Livewire\Profesores\ShowProfesores;
 use App\Http\Livewire\Asignaturas\ShowAsignaturas;
+use App\Http\Livewire\Asignaturas\ShowAsignaturaProfesore;
+use App\Http\Livewire\Alumnos\ShowAlumnos;
 
 
 /*
@@ -24,7 +26,8 @@ Route::get('/', function () {
 Route::middleware(['auth:sanctum', 'verified'])->get('/dashboard', ShowProfesores::class)
  ->name('dashboard');
 
-Route::get('/profesores',ShowProfesores::class)->name('profesores');
+Route::get('/profesores', ShowProfesores::class)->name('profesores');
 Route::get('/asignaturas', ShowAsignaturas::class)->name('asignaturas');
-
+//Route::get('/', ShowAsignaturaProfesore::class)->name('asignaturas_profesores');
+Route::get('/alumnos', ShowAlumnos::class)->name('alumnos');
 

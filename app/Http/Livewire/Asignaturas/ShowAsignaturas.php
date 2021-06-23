@@ -12,17 +12,26 @@ class ShowAsignaturas extends Component
     public $sort = 'id';
     public $direction = 'desc';
 
-    public $asignatura;
+
+    public $open = false; //para que el modal este cerrado al ingresar en la pagina
+
+    public $nombre, $tipo, $asignatura;
 
     protected $rules = [
         'asignatura.nombre' => 'required|max:50',
         'asignatura.tipo'=>'required',
     ];
+    //Para abrir el modal de editar
+    public $open_edit = false;
 
-    public function mount()
+    protected $listeners = ['render', 'delete'];
+
+    public function mount(Asignatura $asignatura)
     {
-        $this->asignaturas = Asignatura::all(); //Inicializamos esta variable
+        $this->asignatura = $asignatura;
+
     }
+
 
 
     public function render()
@@ -48,7 +57,24 @@ class ShowAsignaturas extends Component
             $this->direction = 'asc';
         }
     }
+    public function edit(Asignatura $asignatura)
+    {
+        $this->asignatura = $asignatura;
+        $this->open_edit = true;
+    }
+    public function update()
+    {
 
+        $this->validate();
+        $this->asignatura->save();
+        $this->reset(['open_edit']);
+
+        $this->emit('alert', 'La asignatura se ha actualizado correctamente');
+    }
+    public function delete(Asignatura $asignatura)
+    {
+        $asignatura->delete();
+    }
 
 
 }

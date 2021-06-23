@@ -10,8 +10,6 @@ use Livewire\WithPagination;
 
 use App\Models\Profesore;
 
-
-
 class ShowProfesores extends Component
 {
 
@@ -110,8 +108,8 @@ class ShowProfesores extends Component
         $this->open_edit= true;
     }
 
-    public function update(){
-
+    public function update()
+    {
         $this->validate();
 
         if ($this->image) {

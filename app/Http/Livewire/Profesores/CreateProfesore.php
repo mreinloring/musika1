@@ -19,6 +19,7 @@ class CreateProfesore extends Component
     //Declaramos las propiedades del profesor o campos de la tabla
     public $profesore_id, $nombre, $apellido1, $apellido2, $email, $telefono, $dni, $numSS, $fechaNto, $fechaAlta, $fechaBaja ,
            $image,$iban,$calle,$numero,$piso,$codigoPostal,$poblacion,$provincia;
+
     protected $rules = [
         'nombre' => 'required|max:50',
         'apellido1' => 'required|max:50',

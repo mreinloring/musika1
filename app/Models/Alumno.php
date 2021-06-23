@@ -4,14 +4,21 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+
 use Carbon\Carbon;
 
-class Profesore extends Model
+
+class Alumno extends Model
 {
     use HasFactory;
-    protected $fillable=['nombre', 'apellido1', 'apellido2', 'email', 'telefono',
-                            'dni', 'numSS', 'fechaNto', 'fechaAlta', 'fechaBaja', 'image', 'iban',
-                            'calle', 'numero', 'piso', 'codigoPostal', 'poblacion', 'provincia'];
+
+
+    protected $fillable = [
+        'nombre', 'apellido1', 'apellido2', 'email','email2', 'telefono','telefono2',
+        'fechaNto', 'fechaAlta', 'fechaBaja', 'image','nombrePadres', 'iban','dni',
+        'unidadFamiliar', 'familiaNumerosa','fechaFamNum','noAutorizoFoto','gazteTxartela15','incidencias','centroTarine',
+         'calle', 'numero', 'piso', 'codigoPostal', 'poblacion', 'provincia','profesore_id'
+    ];
 
     //Para calcular la edad
     public function getAgeAttribute()
@@ -24,4 +31,6 @@ class Profesore extends Model
     {
         return $this->belongsToMany('App\Models\Asignatura')->withPivot('nombre', 'tipo');
     }
+
+
 }

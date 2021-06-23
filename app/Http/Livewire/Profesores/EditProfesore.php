@@ -43,7 +43,6 @@ class EditProfesore extends Component
     public function save(){
         $this->validate();
 
-
         if ($this->image) {
             //Para eliminar la imagen almacenada antes de cambiarla
             Storage::delete([$this->profesore->image]);

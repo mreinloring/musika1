@@ -26,6 +26,16 @@
                         {{ __('Asignaturas') }}
                     </x-jet-nav-link>
                 </div>
+                {{-- <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('asignaturas_profesores') }}" :active="request()->routeIs('dashboard')">
+                        {{ __('Asignaturas-Profesores') }}
+                    </x-jet-nav-link>
+                </div> --}}
+                 <div class="hidden space-x-8 sm:-my-px sm:ml-10 sm:flex">
+                    <x-jet-nav-link href="{{ route('alumnos') }}" :active="request()->routeIs('dashboard')">
+                        {{ __('Alumnos') }}
+                    </x-jet-nav-link>
+                </div>
 
             </div>
 
