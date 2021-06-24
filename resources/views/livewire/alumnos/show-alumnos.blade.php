@@ -12,7 +12,7 @@
 
                 <div class="px-4 py-6 flex items-center">
                     {{-- Esta es la paginacion --}}
-                     {{-- <div class="flex items-center">
+                      <div class="flex items-center">
                         <span>Mostrar</span>
                         <select wire:model="cant" class="mx-2 form-control">
                             <option value="10">10</option>
@@ -22,14 +22,14 @@
                             <option value="600">600</option>
                         </select>
                         <span>registros</span>
-                    </div> --}}
+                    </div>
                     {{-- Este es el buscador --}}
                     <x-jet-input class="flex-1 mx-4" placeholder="Escriba su busqueda" wire:model="search" type='text' />
                     {{-- @livewire('alumnos.create-alumno') --}}
                 </div>
                 {{-- Esta es la tabla --}}
                 {{-- @if ($profesores->count()) //Esto es para contar en una coleccion --}}
-                {{--@if ($alumnos->count()) //Esto es para contar una array --}}
+                {{--@if (count($alumnos)) //Esto es para contar una array --}}
                 @if (count($alumnos))
 
                     <table class="min-w-full divide-y divide-gray-200">
@@ -97,7 +97,7 @@
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
-                                    DNI
+                                    Fecha Baja
                                 </th>
                                 <th scope="col"
                                     class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider cursor-pointer">
@@ -113,7 +113,7 @@
                         <tbody class="bg-white divide-y divide-gray-200">
 
 
-                            Alumnos actuales: {{$alumnos->count()}}
+                            Alumnos actuales: {{$alumnosActuales->count()}}
 
                             @foreach ($alumnos as $item)
                                      <tr>
@@ -188,11 +188,11 @@
 
                         </tbody>
                     </table>
-                 {{-- @if ($alumnos->hasPages())
+                  @if ($alumnos->hasPages())
                     <div class="px-6 py-3">
                         {{ $alumnos->links() }}
                     </div>
-                @endif --}}
+                @endif
                 @else
                     <div class="px-4 py-6">
                         No existe ningun registro coincidente

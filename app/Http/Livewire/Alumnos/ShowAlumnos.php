@@ -3,15 +3,17 @@
 namespace App\Http\Livewire\Alumnos;
 
 use Livewire\Component;
+use Livewire\WithFileUploads;
 use Illuminate\Support\Facades\Storage;
-
-
+use Livewire\WithPagination;
+use Carbon\Carbon;
 
 use App\Models\Alumno;
 
 class ShowAlumnos extends Component
 {
-
+    use WithFileUploads;
+    use WithPagination;
 
     //Propiedades del buscador y orden
     public $search = '';
@@ -22,6 +24,13 @@ class ShowAlumnos extends Component
     public $disabled = true;
     public $filtered;
 
+    //Para enviar el paginador y buscador por la url
+    protected $queryString = [
+        'cant' => ['except' => '10'],
+        'sort' => ['except' => 'id'],
+        'direction' => ['except' => 'desc'],
+        'search' => ['except' => '']
+    ];
 
     protected $rules = [
         'alumno.nombre' => 'required|max:50',
@@ -46,20 +55,26 @@ class ShowAlumnos extends Component
         'alumno.incidencias' => '',
         'alumno.centroTarine' => 'required',
     ];
+    public $alumnosActuales;
+
+    public function mount()
+    {
+        $this->identificador = rand();
+        $this->alumno = new Alumno(); //Inicializamos esta variable
+    }
+
     public function render()
     {
-        //$alumnos=Alumno::whereNull('fechaBaja')->get();
+         $this->alumnosActuales=Alumno::whereNull('fechaBaja')->get();
 
-
-         $alumnos=Alumno::whereNull('fechaBaja')
-                        ->where('id', 'like', '%' . $this->search . '%')
-                        ->where('nombre', 'like', '%' . $this->search . '%')
-                        ->where('apellido1', 'like', '%' . $this->search . '%')
-                        ->where('apellido2', 'like', '%' . $this->search . '%')
-                        ->where('email', 'like', '%' . $this->search . '%')
-                        ->where('telefono', 'like', '%' . $this->search . '%')
+          $alumnos=Alumno::where('id', 'like', '%' . $this->search . '%')
+                        ->orWhere('nombre', 'like', '%' . $this->search . '%')
+                        ->orWhere('apellido1', 'like', '%' . $this->search . '%')
+                        ->orWhere('apellido2', 'like', '%' . $this->search . '%')
+                        ->orWhere('email', 'like', '%' . $this->search . '%')
+                        ->orWhere('telefono', 'like', '%' . $this->search . '%')
                         ->orderBy($this->sort, $this->direction)
-                        ->get();
+                        ->paginate($this->cant);
 
 
         return view('livewire.alumnos.show-alumnos', compact('alumnos'));
