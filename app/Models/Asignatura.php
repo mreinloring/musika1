@@ -21,4 +21,9 @@ class Asignatura extends Model
     {
         return $this->belongsToMany('App\Models\Alumno')->withPivot('nombre', 'apellido1', 'apellido2');
     }
+    //Relacion uno a muchos
+    public function expedientes()
+    {
+        return $this->hasMany('App\Models\Expediente');
+    }
 }
